@@ -43,8 +43,9 @@ const Contact = () => {
   return (
     <>
       <SEO
-        title="تماس با ما | Translation Land"
-        description="با Translation Land تماس بگیرید. تلفن: ۰۹۱۵۰۶۱۶۷۸۸ | ایمیل: m.amin.rezai@gmail.com | مشاوره رایگان ترجمه مقاله"
+        title="تماس با ما | سایت ترجمه مقاله Translation Land"
+        description="با سایت ترجمه مقاله Translation Land تماس بگیرید. خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی، ترجمه رسمی، مشاوره رایگان. تلفن: ۰۹۱۵۰۶۱۶۷۸۸"
+        keywords="خدمات ترجمه, سایت ترجمه مقاله, ترجمه رسمی, ترجمه مقاله"
       />
       <main className="pt-24">
         <section className="gradient-section py-16">

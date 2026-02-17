@@ -1,24 +1,30 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Globe, BookOpen, Sparkles } from "lucide-react";
+import { Globe, BookOpen, Sparkles, FileCheck } from "lucide-react";
 
 const services = [
   {
     icon: Globe,
     title: "ترجمه مقاله انگلیسی به فارسی",
-    desc: "مناسب برای پایان‌نامه و پژوهش با مترجمان هم‌رشته",
-    price: "از ۳۵,۰۰۰ تومان",
+    desc: "ترجمه تخصصی مقاله انگلیسی به فارسی با مترجمان هم‌رشته. مناسب برای پایان‌نامه، پژوهش و مطالعات آکادمیک.",
+    price: "از ۵۵ تومان/کلمه",
   },
   {
     icon: BookOpen,
     title: "ترجمه مقاله فارسی به انگلیسی",
-    desc: "ویژه چاپ در مجلات ISI با ویرایش نیتیو و گارانتی پذیرش",
-    price: "از ۹۰,۰۰۰ تومان",
+    desc: "ترجمه فارسی به انگلیسی ویژه چاپ در مجلات ISI و بین‌المللی با ویرایش نیتیو و گارانتی پذیرش.",
+    price: "از ۲۲۰ تومان/کلمه",
+  },
+  {
+    icon: FileCheck,
+    title: "ترجمه رسمی مدارک",
+    desc: "ترجمه رسمی مدارک دانشگاهی و اسناد رسمی با تأیید دادگستری و وزارت امور خارجه.",
+    price: "قیمت توافقی",
   },
   {
     icon: Sparkles,
-    title: "خدمات ویژه",
-    desc: "پارافریز، چک سرقت علمی، مشاوره چاپ مقاله و تحویل فوری",
+    title: "خدمات ترجمه ویژه",
+    desc: "پارافریز، چک سرقت علمی، مشاوره چاپ مقاله انگلیسی و ترجمه با کمک هوش مصنوعی.",
     price: "قیمت توافقی",
   },
 ];
@@ -33,11 +39,11 @@ const ServicesPreview = () => {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">خدمات ما</h2>
-          <p className="text-muted-foreground text-lg">طیف گسترده‌ای از خدمات ترجمه و ویرایش مقالات علمی</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">خدمات ترجمه تخصصی</h2>
+          <p className="text-muted-foreground text-lg">طیف گسترده‌ای از خدمات ترجمه مقاله انگلیسی و ویرایش مقالات علمی</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((s, i) => (
             <motion.div
               key={i}

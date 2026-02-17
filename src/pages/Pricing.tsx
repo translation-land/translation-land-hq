@@ -3,18 +3,14 @@ import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import PricingTable from "@/components/home/PricingTable";
 import { GraduationCap, BookOpen, Users, UserPlus } from "lucide-react";
-
-const qualityLevels = [
-  { label: "پایه", rate: 35 },
-  { label: "حرفه‌ای", rate: 90 },
-  { label: "پریمیوم", rate: 180 },
-];
-
-const extras = [
-  { label: "ویرایش نیتیو", price: 50000 },
-  { label: "پارافریز", price: 20000 },
-  { label: "تحویل فوری", price: 30000 },
-];
+import {
+  enToFaLevels,
+  faToEnLevels,
+  fieldMultipliers,
+  extras,
+  calculatePrice,
+  type LanguageDirection,
+} from "@/lib/pricing";
 
 const discounts = [
   { icon: GraduationCap, title: "تخفیف دانشجویی", value: "۱۵٪", desc: "با ارائه کارت دانشجویی معتبر" },
@@ -25,14 +21,25 @@ const discounts = [
 
 const Pricing = () => {
   const [wordCount, setWordCount] = useState(1000);
-  const [quality, setQuality] = useState(1);
+  const [direction, setDirection] = useState<LanguageDirection>("en-to-fa");
+  const [quality, setQuality] = useState(0);
+  const [fieldIndex, setFieldIndex] = useState(0);
   const [selectedExtras, setSelectedExtras] = useState<boolean[]>([false, false, false]);
 
+  const levels = direction === "en-to-fa" ? enToFaLevels : faToEnLevels;
+
+  // Reset quality when direction changes if index out of bounds
+  const safeQuality = quality >= levels.length ? 0 : quality;
+
   const total = useMemo(() => {
-    const base = (wordCount / 1000) * qualityLevels[quality].rate * 1000;
-    const extrasTotal = selectedExtras.reduce((sum, sel, i) => sel ? sum + extras[i].price : sum, 0);
-    return base + extrasTotal;
-  }, [wordCount, quality, selectedExtras]);
+    return calculatePrice(
+      wordCount,
+      direction,
+      safeQuality,
+      fieldMultipliers[fieldIndex].multiplier,
+      selectedExtras
+    );
+  }, [wordCount, direction, safeQuality, fieldIndex, selectedExtras]);
 
   const toggleExtra = (i: number) => {
     setSelectedExtras(prev => prev.map((v, idx) => idx === i ? !v : v));
@@ -41,14 +48,15 @@ const Pricing = () => {
   return (
     <>
       <SEO
-        title="قیمت ترجمه مقاله | از ۳۵,۰۰۰ تومان | Translation Land"
-        description="قیمت ترجمه مقاله تخصصی از ۳۵,۰۰۰ تومان. محاسبه آنلاین قیمت ترجمه. بدون هزینه پنهان. تخفیف دانشجویی."
+        title="قیمت ترجمه مقاله | ترجمه انگلیسی به فارسی از ۵۵ تومان/کلمه | Translation Land"
+        description="قیمت ترجمه مقاله انگلیسی به فارسی و فارسی به انگلیسی. محاسبه آنلاین قیمت ترجمه تخصصی. بدون هزینه پنهان. تخفیف دانشجویی. سایت ترجمه مقاله Translation Land."
+        keywords="قیمت ترجمه مقاله, ترجمه انگلیسی به فارسی, ترجمه فارسی به انگلیسی, خدمات ترجمه, سایت ترجمه مقاله"
       />
       <main className="pt-24">
         <section className="gradient-section py-16">
           <div className="section-container text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4">قیمت‌گذاری شفاف و رقابتی</h1>
-            <p className="text-primary-foreground/80 text-lg">بدون هزینه پنهان - پرداخت امن</p>
+            <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4">قیمت ترجمه مقاله انگلیسی</h1>
+            <p className="text-primary-foreground/80 text-lg">تعرفه رقابتی خدمات ترجمه - بدون هزینه پنهان</p>
           </div>
         </section>
 
@@ -61,7 +69,27 @@ const Pricing = () => {
               viewport={{ once: true }}
               className="card-elevated p-8"
             >
-              <h2 className="text-2xl font-bold mb-8 text-center">محاسبه قیمت آنلاین</h2>
+              <h2 className="text-2xl font-bold mb-8 text-center">محاسبه قیمت آنلاین ترجمه</h2>
+
+              {/* Direction */}
+              <div className="mb-6">
+                <label className="block font-semibold mb-2">جهت ترجمه</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(["en-to-fa", "fa-to-en"] as LanguageDirection[]).map((dir) => (
+                    <button
+                      key={dir}
+                      onClick={() => { setDirection(dir); setQuality(0); }}
+                      className={`py-3 rounded-lg border-2 text-sm font-medium transition-all ${
+                        direction === dir
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border hover:border-primary/50"
+                      }`}
+                    >
+                      {dir === "en-to-fa" ? "انگلیسی به فارسی" : "فارسی به انگلیسی"}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               {/* Word count */}
               <div className="mb-6">
@@ -79,23 +107,39 @@ const Pricing = () => {
               {/* Quality */}
               <div className="mb-6">
                 <label className="block font-semibold mb-2">سطح کیفیت</label>
-                <div className="grid grid-cols-3 gap-3">
-                  {qualityLevels.map((q, i) => (
+                <div className={`grid gap-3 ${levels.length === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
+                  {levels.map((q, i) => (
                     <button
                       key={i}
                       onClick={() => setQuality(i)}
                       className={`py-3 rounded-lg border-2 text-sm font-medium transition-all ${
-                        quality === i
+                        safeQuality === i
                           ? "border-primary bg-primary/10 text-primary"
                           : "border-border hover:border-primary/50"
                       }`}
                     >
                       {q.label}
                       <br />
-                      <span className="text-xs text-muted-foreground">{q.rate},۰۰۰ تومان</span>
+                      <span className="text-xs text-muted-foreground">{q.rate.toLocaleString("fa-IR")} تومان/کلمه</span>
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Field */}
+              <div className="mb-6">
+                <label className="block font-semibold mb-2">رشته تخصصی</label>
+                <select
+                  value={fieldIndex}
+                  onChange={(e) => setFieldIndex(Number(e.target.value))}
+                  className="w-full border border-input rounded-lg py-3 px-4 bg-background text-foreground focus:ring-2 focus:ring-ring outline-none"
+                >
+                  {fieldMultipliers.map((fm, i) => (
+                    <option key={i} value={i}>
+                      {fm.label} {fm.multiplier > 1 ? `(×${fm.multiplier})` : ""}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Extras */}
@@ -111,7 +155,11 @@ const Pricing = () => {
                         className="w-4 h-4 accent-primary"
                       />
                       <span className="flex-1">{ex.label}</span>
-                      <span className="text-sm text-muted-foreground">+{ex.price.toLocaleString("fa-IR")} تومان</span>
+                      <span className="text-sm text-muted-foreground">
+                        {ex.pricePerWord
+                          ? `+${ex.pricePerWord} تومان/کلمه`
+                          : `+${ex.flatPrice!.toLocaleString("fa-IR")} تومان`}
+                      </span>
                     </label>
                   ))}
                 </div>

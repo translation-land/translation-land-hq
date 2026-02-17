@@ -14,7 +14,7 @@ const Footer = () => {
               <span>Translation Land</span>
             </Link>
             <p className="text-sm leading-7 opacity-80">
-              Translation Land ارائه‌دهنده خدمات ترجمه تخصصی مقالات علمی و پژوهشی با بیش از ۱۰ سال تجربه.
+              Translation Land بهترین سایت ترجمه مقاله تخصصی. خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی، ترجمه رسمی مدارک و ترجمه با هوش مصنوعی.
               مترجمان متخصص، تحویل سریع و گارانتی کیفیت.
             </p>
             <div className="flex gap-3 mt-6">
@@ -35,8 +35,8 @@ const Footer = () => {
             <h3 className="font-bold text-lg mb-4">لینک‌های سریع</h3>
             <ul className="space-y-3 text-sm opacity-80">
               {[
-                { label: "خدمات", path: "/services" },
-                { label: "قیمت", path: "/pricing" },
+                { label: "خدمات ترجمه", path: "/services" },
+                { label: "قیمت ترجمه", path: "/pricing" },
                 { label: "بلاگ", path: "/blog" },
                 { label: "سوالات متداول", path: "/#faq" },
                 { label: "درباره ما", path: "/about" },
@@ -52,13 +52,14 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="font-bold text-lg mb-4">خدمات</h3>
+            <h3 className="font-bold text-lg mb-4">خدمات ترجمه</h3>
             <ul className="space-y-3 text-sm opacity-80">
-              <li>ترجمه انگلیسی به فارسی</li>
-              <li>ترجمه فارسی به انگلیسی</li>
-              <li>ویرایش نیتیو</li>
-              <li>پارافریز</li>
-              <li>چک سرقت علمی</li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">ترجمه انگلیسی به فارسی</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">ترجمه فارسی به انگلیسی</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">ترجمه رسمی مدارک</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">ویرایش نیتیو</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">پارافریز و چک سرقت علمی</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">ترجمه با هوش مصنوعی</Link></li>
             </ul>
           </div>
 
@@ -84,7 +85,7 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="border-t border-muted/20 mt-12 pt-8 text-center text-sm opacity-60">
-          <p>© ۲۰۲۶ Translation Land. تمامی حقوق محفوظ است.</p>
+          <p>© ۲۰۲۶ Translation Land | سایت ترجمه مقاله تخصصی. تمامی حقوق محفوظ است.</p>
         </div>
       </div>
     </footer>

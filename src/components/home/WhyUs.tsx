@@ -34,8 +34,8 @@ const WhyUs = () => {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">چرا Translation Land را انتخاب کنید؟</h2>
-          <p className="text-muted-foreground text-lg">مترجمان متخصص، کیفیت بالا و خدمات حرفه‌ای</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">چرا Translation Land بهترین سایت ترجمه مقاله است؟</h2>
+          <p className="text-muted-foreground text-lg">خدمات ترجمه تخصصی با کمک هوش مصنوعی، مترجمان متخصص و کیفیت بالا</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
