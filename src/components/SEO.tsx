@@ -6,10 +6,12 @@ interface SEOProps {
   keywords?: string;
   canonical?: string;
   ogImage?: string;
-  schema?: object;
+  schema?: object | object[];
 }
 
 const SEO = ({ title, description, keywords, canonical, ogImage, schema }: SEOProps) => {
+  const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+
   return (
     <Helmet>
       <title>{title}</title>
@@ -21,9 +23,9 @@ const SEO = ({ title, description, keywords, canonical, ogImage, schema }: SEOPr
       {ogImage && <meta property="og:image" content={ogImage} />}
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
-      {schema && (
-        <script type="application/ld+json">{JSON.stringify(schema)}</script>
-      )}
+      {schemas.map((s, i) => (
+        <script key={i} type="application/ld+json">{JSON.stringify(s)}</script>
+      ))}
     </Helmet>
   );
 };

@@ -5,9 +5,9 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const stats = [
   { icon: Star, label: "۴.۹/۵ رضایت مشتریان", color: "text-accent" },
-  { icon: CheckCircle, label: "۱۰۰۰+ مقاله ترجمه شده", color: "text-secondary" },
+  { icon: CheckCircle, label: "۱۰۰۰+ مقاله انگلیسی ترجمه شده", color: "text-secondary" },
   { icon: GraduationCap, label: "مترجمان دکتری و ارشد", color: "text-primary" },
-  { icon: Zap, label: "تحویل در ۲۴-۴۸ ساعت", color: "text-accent" },
+  { icon: Zap, label: "تحویل فوری در ۲۴-۴۸ ساعت", color: "text-accent" },
 ];
 
 const Hero = () => {
@@ -15,7 +15,7 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <img src={heroBg} alt="ترجمه مقاله تخصصی" className="w-full h-full object-cover" />
+        <img src={heroBg} alt="سایت ترجمه مقاله - ترجمه انگلیسی به فارسی و فارسی به انگلیسی" className="w-full h-full object-cover" />
         <div className="absolute inset-0 gradient-section opacity-90" />
       </div>
 
@@ -26,12 +26,12 @@ const Hero = () => {
           transition={{ duration: 0.7 }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary-foreground leading-tight mb-6 text-balance">
-            ترجمه تخصصی مقاله
+            بهترین سایت ترجمه مقاله
             <br />
-            <span className="opacity-90">با کیفیت بالا و قیمت مناسب</span>
+            <span className="opacity-90">ترجمه انگلیسی به فارسی و فارسی به انگلیسی</span>
           </h1>
           <h2 className="text-lg md:text-xl text-primary-foreground/80 mb-10 font-light">
-            تحویل سریع | مترجمان متخصص | گارانتی کیفیت
+            خدمات ترجمه تخصصی مقاله انگلیسی | ترجمه رسمی | تحویل سریع | گارانتی کیفیت
           </h2>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
