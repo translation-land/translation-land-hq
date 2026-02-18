@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, Instagram, Send, MessageCircle, Linkedin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Instagram, Send, MessageCircle, Linkedin, Paperclip, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -27,16 +27,63 @@ const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mohammad-amin-rezaie-43a318186/", color: "bg-primary/10 text-primary" },
 ];
 
+const FORMSPREE_URL = "https://formspree.io/f/xlgwbdgo";
+const MAX_FILES = 5;
+const MAX_FILE_SIZE_MB = 10;
+
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [files, setFiles] = useState<File[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactForm>();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selected = Array.from(e.target.files || []);
+    const validFiles = selected.filter(f => f.size <= MAX_FILE_SIZE_MB * 1024 * 1024);
+    if (validFiles.length < selected.length) {
+      toast.error(`حداکثر حجم هر فایل ${MAX_FILE_SIZE_MB} مگابایت است`);
+    }
+    setFiles(prev => {
+      const combined = [...prev, ...validFiles].slice(0, MAX_FILES);
+      if (prev.length + validFiles.length > MAX_FILES) {
+        toast.error(`حداکثر ${MAX_FILES} فایل مجاز است`);
+      }
+      return combined;
+    });
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const removeFile = (index: number) => {
+    setFiles(prev => prev.filter((_, i) => i !== index));
+  };
 
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
-    // Simulate submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast.success("پیام شما با موفقیت ارسال شد! به زودی با شما تماس خواهیم گرفت.");
-    reset();
+    try {
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("phone", data.phone);
+      formData.append("subject", data.subject);
+      formData.append("message", data.message);
+      files.forEach(file => formData.append("attachment", file));
+
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        toast.success("پیام شما با موفقیت ارسال شد! به زودی با شما تماس خواهیم گرفت.");
+        reset();
+        setFiles([]);
+      } else {
+        toast.error("خطا در ارسال پیام. لطفاً دوباره تلاش کنید.");
+      }
+    } catch {
+      toast.error("خطا در ارتباط با سرور. لطفاً دوباره تلاش کنید.");
+    }
     setIsSubmitting(false);
   };
 
@@ -60,7 +107,7 @@ const Contact = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Form */}
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                <h2 className="text-2xl font-bold mb-6">ارسال پیام</h2>
+                <h2 className="text-2xl font-bold mb-6">ثبت سفارش آنلاین</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div>
                     <label className="block font-medium mb-1.5 text-sm">نام و نام خانوادگی *</label>
@@ -121,12 +168,45 @@ const Contact = () => {
                     {errors.message && <p className="text-destructive text-xs mt-1">{errors.message.message}</p>}
                   </div>
 
+                  {/* File Upload */}
+                  <div>
+                    <label className="block font-medium mb-1.5 text-sm">فایل پیوست (حداکثر {MAX_FILES} فایل، هر کدام تا {MAX_FILE_SIZE_MB}MB)</label>
+                    <div
+                      className="border-2 border-dashed border-input rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 transition-colors"
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      <Paperclip className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                      <p className="text-sm text-muted-foreground">برای آپلود فایل کلیک کنید</p>
+                      <p className="text-xs text-muted-foreground mt-1">PDF, DOCX, XLSX, JPG, PNG, ZIP</p>
+                    </div>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      multiple
+                      className="hidden"
+                      accept=".pdf,.doc,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.zip,.rar,.pptx,.txt"
+                      onChange={handleFileChange}
+                    />
+                    {files.length > 0 && (
+                      <div className="mt-3 space-y-2">
+                        {files.map((file, i) => (
+                          <div key={i} className="flex items-center justify-between bg-muted/50 rounded-lg px-3 py-2 text-sm">
+                            <span className="truncate ml-2">{file.name} ({(file.size / 1024 / 1024).toFixed(1)}MB)</span>
+                            <button type="button" onClick={() => removeFile(i)} className="text-destructive hover:text-destructive/80 flex-shrink-0">
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="btn-primary-glow w-full rounded-xl disabled:opacity-50"
                   >
-                    {isSubmitting ? "در حال ارسال..." : "ارسال پیام"}
+                    {isSubmitting ? "در حال ارسال..." : "ارسال سفارش"}
                   </button>
                 </form>
               </motion.div>
