@@ -11,10 +11,10 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center gap-2 text-primary font-bold text-xl mb-4">
               <FileText className="w-6 h-6" />
-              <span>Translation Land</span>
+              <span>Tarjome Land</span>
             </Link>
             <p className="text-sm leading-7 opacity-80">
-              Translation Land بهترین سایت ترجمه مقاله تخصصی. خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی، ترجمه رسمی مدارک و ترجمه با هوش مصنوعی.
+              Tarjome Land بهترین سایت ترجمه مقاله تخصصی. خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی، ترجمه رسمی مدارک و ترجمه با هوش مصنوعی.
               مترجمان متخصص، تحویل سریع و گارانتی کیفیت.
             </p>
             <div className="flex gap-3 mt-6">
@@ -85,7 +85,7 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="border-t border-muted/20 mt-12 pt-8 text-center text-sm opacity-60">
-          <p>© ۲۰۲۶ Translation Land | سایت ترجمه مقاله تخصصی. تمامی حقوق محفوظ است.</p>
+          <p>© ۲۰۲۶ Tarjome Land | سایت ترجمه مقاله تخصصی. تمامی حقوق محفوظ است.</p>
         </div>
       </div>
     </footer>

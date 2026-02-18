@@ -9,7 +9,7 @@ const posts = [
     excerpt: "در این مقاله، تمام مراحل ترجمه مقاله انگلیسی ISI از انتخاب ژورنال تا چاپ نهایی را بررسی می‌کنیم...",
     category: "راهنما",
     date: "بهمن ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۱۰ دقیقه",
   },
   {
@@ -18,7 +18,7 @@ const posts = [
     excerpt: "هوش مصنوعی برای ترجمه مقاله ابزاری قدرتمند اما ناکافی است. بررسی نقش AI در کنترل کیفیت ترجمه تخصصی و چرا مترجم انسانی ضروری است...",
     category: "تکنولوژی",
     date: "بهمن ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۸ دقیقه",
   },
   {
@@ -27,7 +27,7 @@ const posts = [
     excerpt: "ترجمه تخصصی مقاله انگلیسی نیازمند دانش عمیق در حوزه مورد نظر است. تفاوت‌های کلیدی و اهمیت انتخاب مترجم هم‌رشته...",
     category: "آموزشی",
     date: "بهمن ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۷ دقیقه",
   },
   {
@@ -36,7 +36,7 @@ const posts = [
     excerpt: "چگونه بهترین سایت ترجمه مقاله را انتخاب کنیم؟ معیارهای مهم شامل کیفیت، قیمت، تحویل، گارانتی و...",
     category: "راهنما",
     date: "دی ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۶ دقیقه",
   },
   {
@@ -45,7 +45,7 @@ const posts = [
     excerpt: "نکات مهم در ترجمه انگلیسی به فارسی مقالات علمی. از حفظ اصطلاحات تخصصی تا ساختار جملات فارسی...",
     category: "نکات",
     date: "دی ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۸ دقیقه",
   },
   {
@@ -54,7 +54,7 @@ const posts = [
     excerpt: "راهنمای کامل ترجمه رسمی مدارک دانشگاهی، مراحل تأیید دادگستری و وزارت امور خارجه...",
     category: "راهنما",
     date: "دی ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۹ دقیقه",
   },
   {
@@ -63,7 +63,7 @@ const posts = [
     excerpt: "سرقت علمی یکی از جدی‌ترین تخلفات آکادمیک است. با راهکارهای پیشگیری آشنا شوید...",
     category: "آموزشی",
     date: "آذر ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۹ دقیقه",
   },
   {
@@ -72,7 +72,7 @@ const posts = [
     excerpt: "ترجمه فارسی به انگلیسی مقالات علمی چالش‌های خاصی دارد. نکات مهم برای پذیرش در مجلات معتبر بین‌المللی...",
     category: "آموزشی",
     date: "آذر ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۷ دقیقه",
   },
   {
@@ -81,7 +81,7 @@ const posts = [
     excerpt: "ویرایش نیتیو نقش مهمی در پذیرش مقاله انگلیسی در مجلات بین‌المللی دارد. با مزایای آن آشنا شوید...",
     category: "خدمات",
     date: "آذر ۱۴۰۴",
-    author: "تیم Translation Land",
+    author: "تیم Tarjome Land",
     readTime: "۵ دقیقه",
   },
 ];
@@ -90,7 +90,7 @@ const Blog = () => {
   return (
     <>
       <SEO
-        title="بلاگ ترجمه مقاله | هوش مصنوعی برای ترجمه | راهنمای ترجمه رسمی | Translation Land"
+        title="بلاگ ترجمه مقاله | هوش مصنوعی برای ترجمه | راهنمای ترجمه رسمی | Tarjome Land"
         description="مقالات آموزشی درباره ترجمه مقاله انگلیسی، هوش مصنوعی برای ترجمه مقاله، ترجمه رسمی مدارک، نکات ترجمه انگلیسی به فارسی و فارسی به انگلیسی."
         keywords="هوش مصنوعی برای ترجمه مقاله, مقاله انگلیسی, ترجمه رسمی, سایت ترجمه مقاله, ترجمه انگلیسی به فارسی, ترجمه فارسی به انگلیسی"
       />
