@@ -39,7 +39,7 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 text-primary font-bold text-xl">
           <FileText className="w-7 h-7" />
-          <span>Translation Land</span>
+          <span>Tarjome-Land</span>
         </Link>
 
         {/* Desktop Nav */}
