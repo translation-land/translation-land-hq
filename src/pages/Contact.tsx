@@ -7,9 +7,7 @@ import { toast } from "sonner";
 
 interface ContactForm {
   name: string;
-  email: string;
   phone: string;
-  subject: string;
   message: string;
 }
 
@@ -23,7 +21,7 @@ const contactInfo = [
 const socials = [
   { icon: Instagram, label: "Instagram", href: "https://instagram.com/maminrezai", color: "bg-pink-500/10 text-pink-500" },
   { icon: Send, label: "Telegram", href: "https://t.me/maminre", color: "bg-primary/10 text-primary" },
-  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/qr/ERDSPOB6INRHP1", color: "bg-secondary/10 text-secondary" },
+  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/989150616788", color: "bg-secondary/10 text-secondary" },
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mohammad-amin-rezaie-43a318186/", color: "bg-primary/10 text-primary" },
 ];
 
@@ -62,9 +60,7 @@ const Contact = () => {
     try {
       const formData = new FormData();
       formData.append("name", data.name);
-      formData.append("email", data.email);
       formData.append("phone", data.phone);
-      formData.append("subject", data.subject);
       formData.append("message", data.message);
       files.forEach(file => formData.append("attachment", file));
 
@@ -90,8 +86,8 @@ const Contact = () => {
   return (
     <>
       <SEO
-        title="تماس با ما | سایت ترجمه مقاله Translation Land"
-        description="با سایت ترجمه مقاله Translation Land تماس بگیرید. خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی، ترجمه رسمی، مشاوره رایگان. تلفن: ۰۹۱۵۰۶۱۶۷۸۸"
+        title="تماس با ما | سایت ترجمه مقاله Tarjome Land"
+        description="با سایت ترجمه مقاله Tarjome Land تماس بگیرید. خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی، ترجمه رسمی، مشاوره رایگان. تلفن: ۰۹۱۵۰۶۱۶۷۸۸"
         keywords="خدمات ترجمه, سایت ترجمه مقاله, ترجمه رسمی, ترجمه مقاله"
       />
       <main className="pt-24">
@@ -119,42 +115,15 @@ const Contact = () => {
                     {errors.name && <p className="text-destructive text-xs mt-1">{errors.name.message}</p>}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block font-medium mb-1.5 text-sm">ایمیل *</label>
-                      <input
-                        type="email"
-                        {...register("email", { required: "ایمیل الزامی است", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "ایمیل معتبر نیست" } })}
-                        className="w-full border border-input rounded-lg py-3 px-4 bg-background text-foreground focus:ring-2 focus:ring-ring outline-none"
-                        placeholder="email@example.com"
-                        dir="ltr"
-                      />
-                      {errors.email && <p className="text-destructive text-xs mt-1">{errors.email.message}</p>}
-                    </div>
-                    <div>
-                      <label className="block font-medium mb-1.5 text-sm">شماره تماس *</label>
-                      <input
-                        {...register("phone", { required: "شماره تماس الزامی است" })}
-                        className="w-full border border-input rounded-lg py-3 px-4 bg-background text-foreground focus:ring-2 focus:ring-ring outline-none"
-                        placeholder="۰۹۱۲XXXXXXX"
-                        dir="ltr"
-                      />
-                      {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone.message}</p>}
-                    </div>
-                  </div>
-
                   <div>
-                    <label className="block font-medium mb-1.5 text-sm">موضوع</label>
-                    <select
-                      {...register("subject")}
+                    <label className="block font-medium mb-1.5 text-sm">شماره تماس *</label>
+                    <input
+                      {...register("phone", { required: "شماره تماس الزامی است" })}
                       className="w-full border border-input rounded-lg py-3 px-4 bg-background text-foreground focus:ring-2 focus:ring-ring outline-none"
-                    >
-                      <option value="order">ثبت سفارش ترجمه</option>
-                      <option value="price">استعلام قیمت</option>
-                      <option value="consult">مشاوره رایگان</option>
-                      <option value="complaint">شکایت یا پیشنهاد</option>
-                      <option value="other">سایر</option>
-                    </select>
+                      placeholder="۰۹۱۲XXXXXXX"
+                      dir="ltr"
+                    />
+                    {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone.message}</p>}
                   </div>
 
                   <div>

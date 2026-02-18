@@ -20,14 +20,14 @@ const About = () => {
   return (
     <>
       <SEO
-        title="درباره Translation Land | بهترین سایت ترجمه مقاله تخصصی"
-        description="Translation Land بهترین سایت ترجمه مقاله با بیش از ۱۰ سال تجربه. خدمات ترجمه انگلیسی به فارسی، ترجمه فارسی به انگلیسی، ترجمه رسمی و ترجمه با هوش مصنوعی."
+        title="درباره Tarjome Land | بهترین سایت ترجمه مقاله تخصصی"
+        description="Tarjome Land بهترین سایت ترجمه مقاله با بیش از ۱۰ سال تجربه. خدمات ترجمه انگلیسی به فارسی، ترجمه فارسی به انگلیسی، ترجمه رسمی و ترجمه با هوش مصنوعی."
         keywords="سایت ترجمه مقاله, خدمات ترجمه, ترجمه مقاله تخصصی, مقاله انگلیسی"
       />
       <main className="pt-24">
         <section className="gradient-section py-16">
           <div className="section-container text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4">درباره سایت ترجمه مقاله Translation Land</h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4">درباره سایت ترجمه مقاله Tarjome Land</h1>
             <p className="text-primary-foreground/80 text-lg">بیش از یک دهه تجربه در خدمات ترجمه تخصصی مقالات علمی</p>
           </div>
         </section>
@@ -39,7 +39,7 @@ const About = () => {
               <h2 className="text-3xl font-bold mb-6">داستان ما</h2>
               <div className="prose prose-lg text-muted-foreground leading-8 space-y-4">
                 <p>
-                  Translation Land از سال ۱۳۹۳ فعالیت خود را به عنوان سایت ترجمه مقاله تخصصی آغاز کرد. هدف ما ارائه خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی با کیفیت بالا، قیمت مناسب و تحویل سریع بوده و هست.
+                  Tarjome Land از سال ۱۳۹۳ فعالیت خود را به عنوان سایت ترجمه مقاله تخصصی آغاز کرد. هدف ما ارائه خدمات ترجمه انگلیسی به فارسی و فارسی به انگلیسی با کیفیت بالا، قیمت مناسب و تحویل سریع بوده و هست.
                 </p>
                 <p>
                   تیم ما متشکل از بیش از ۵۰ مترجم متخصص با مدرک کارشناسی ارشد و دکتری در رشته‌های مختلف علمی است. ما افتخار داریم که بیش از ۱۰۰۰ مقاله انگلیسی تخصصی در رشته‌های مهندسی، پزشکی، علوم انسانی و علوم پایه ترجمه کرده‌ایم.
