@@ -25,7 +25,7 @@ const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mohammad-amin-rezaie-43a318186/", color: "bg-primary/10 text-primary" },
 ];
 
-const FORMSPREE_URL = "https://formspree.io/f/xlgwbdgo";
+const FORM_URL = "https://www.form-to-email.com/api/s/jwy5OgVihTZp";
 const MAX_FILES = 5;
 const MAX_FILE_SIZE_MB = 10;
 
@@ -64,10 +64,9 @@ const Contact = () => {
       formData.append("message", data.message);
       files.forEach(file => formData.append("attachment", file));
 
-      const res = await fetch(FORMSPREE_URL, {
+      const res = await fetch(FORM_URL, {
         method: "POST",
         body: formData,
-        headers: { Accept: "application/json" },
       });
 
       if (res.ok) {
