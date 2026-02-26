@@ -26,7 +26,7 @@ const Hero = () => {
           transition={{ duration: 0.7 }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary-foreground leading-tight mb-6 text-balance">
-            بهترین سایت ترجمه مقاله
+            ترجمه توسط کارشناس ارشد زبان
             <br />
             <span className="opacity-90">ترجمه انگلیسی به فارسی و فارسی به انگلیسی</span>
           </h1>
