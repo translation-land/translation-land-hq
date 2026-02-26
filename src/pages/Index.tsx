@@ -7,6 +7,7 @@ import Process from "@/components/home/Process";
 import PricingTable from "@/components/home/PricingTable";
 import Testimonials from "@/components/home/Testimonials";
 import FAQ from "@/components/home/FAQ";
+import Founder from "@/components/home/Founder";
 import CTASection from "@/components/home/CTASection";
 
 const faqSchema = {
@@ -94,6 +95,7 @@ const Index = () => {
         <Process />
         <PricingTable />
         <Testimonials />
+        <Founder />
         <FAQ />
         <CTASection />
       </main>
