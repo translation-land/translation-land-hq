@@ -4,11 +4,11 @@ import { Star, CheckCircle, GraduationCap, Zap } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const stats = [
-  { icon: Star, label: "۴.۹/۵ رضایت مشتریان", color: "text-accent" },
-  { icon: CheckCircle, label: "۱۰۰۰+ مقاله انگلیسی ترجمه شده", color: "text-secondary" },
-  { icon: GraduationCap, label: "مترجمان دکتری و ارشد", color: "text-primary" },
-  { icon: Zap, label: "تحویل فوری در ۲۴-۴۸ ساعت", color: "text-accent" },
-];
+{ icon: Star, label: "۴.۹/۵ رضایت مشتریان", color: "text-accent" },
+{ icon: CheckCircle, label: "۱۰۰۰+ مقاله انگلیسی ترجمه شده", color: "text-secondary" },
+{ icon: GraduationCap, label: "مترجمان دکتری و ارشد", color: "text-primary" },
+{ icon: Zap, label: "تحویل فوری در ۲۴-۴۸ ساعت", color: "text-accent" }];
+
 
 const Hero = () => {
   return (
@@ -23,12 +23,12 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
+          transition={{ duration: 0.7 }}>
+
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary-foreground leading-tight mb-6 text-balance">
             ترجمه توسط کارشناس ارشد زبان
             <br />
-            <span className="opacity-90">ترجمه انگلیسی به فارسی و فارسی به انگلیسی</span>
+            <span className="opacity-90">ترجمه مقاله علمی پژوهشی    </span>
           </h1>
           <h2 className="text-lg md:text-xl text-primary-foreground/80 mb-10 font-light">
             خدمات ترجمه تخصصی مقاله انگلیسی | ترجمه رسمی | تحویل سریع | گارانتی کیفیت
@@ -49,23 +49,23 @@ const Hero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
-              className="bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 flex flex-col items-center gap-2"
-            >
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+
+          {stats.map((stat, i) =>
+          <motion.div
+            key={i}
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
+            className="bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 flex flex-col items-center gap-2">
+
               <stat.icon className={`w-6 h-6 ${stat.color}`} />
               <span className="text-primary-foreground text-sm font-medium">{stat.label}</span>
             </motion.div>
-          ))}
+          )}
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default Hero;
