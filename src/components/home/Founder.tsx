@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import founderImg from "@/assets/founder.png";
+import founderImg from "@/assets/founder.jpg";
 
 const Founder = () => {
   return (
