@@ -1,7 +1,16 @@
 
 
-## Plan: Replace Founder Photo
+## Plan: Update Site Title, Favicon, Meta Tags & Push to GitHub
 
-1. Copy `user-uploads://portrait-1.jpg` to `src/assets/founder.png` (overwrite existing)
-2. Update `src/components/home/Founder.tsx` to import the new image (already imports from `@/assets/founder.png`, so just the file copy is needed — or rename to `.jpg` and update the import)
+### Steps
+
+1. **Copy favicon** — Copy `user-uploads://favicon.ico` to `public/favicon.ico` (overwrite existing)
+
+2. **Update `index.html`**:
+   - Change `<title>` to `ترجمه مقاله توسط کارشناس ارشد زبان`
+   - Add `<link rel="icon" href="/favicon.ico" type="image/x-icon">`
+   - Remove "Translation Land" / "Lovable" references from meta tags (author, og:title)
+   - Update `og:title` to match the new title
+
+3. **Push to GitHub** — Trigger GitHub sync after changes are applied
 
