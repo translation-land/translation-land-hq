@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Instagram, Send, MessageCircle, Linkedin, Paperclip, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactForm {
   name: string;
-  phone: string;
+  email: string;
   message: string;
 }
 
@@ -25,7 +26,6 @@ const socials = [
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mohammad-amin-rezaie-43a318186/", color: "bg-primary/10 text-primary" },
 ];
 
-const FORM_URL = "https://www.form-to-email.com/api/s/jwy5OgVihTZp";
 const MAX_FILES = 5;
 const MAX_FILE_SIZE_MB = 10;
 
@@ -58,26 +58,64 @@ const Contact = () => {
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("phone", data.phone);
-      formData.append("message", data.message);
-      files.forEach(file => formData.append("attachment", file));
+      let file_url: string | null = null;
 
-      const res = await fetch(FORM_URL, {
-        method: "POST",
-        body: formData,
+      // Upload file to Supabase Storage if provided
+      if (files.length > 0) {
+        const file = files[0];
+        const fileExt = file.name.split('.').pop();
+        const filePath = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('attachments')
+          .upload(filePath, file);
+
+        if (uploadError) {
+          throw new Error('خطا در آپلود فایل: ' + uploadError.message);
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from('attachments')
+          .getPublicUrl(filePath);
+
+        file_url = publicUrlData.publicUrl;
+      }
+
+      // Insert into contact_submissions table
+      const { error: insertError } = await supabase
+        .from('contact_submissions')
+        .insert({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          file_url,
+        });
+
+      if (insertError) {
+        throw new Error('خطا در ثبت پیام: ' + insertError.message);
+      }
+
+      // Call send-email edge function
+      const { error: fnError } = await supabase.functions.invoke('send-email', {
+        body: {
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          file_url,
+        },
       });
 
-      if (res.ok) {
-        toast.success("پیام شما با موفقیت ارسال شد! به زودی با شما تماس خواهیم گرفت.");
-        reset();
-        setFiles([]);
-      } else {
-        toast.error("خطا در ارسال پیام. لطفاً دوباره تلاش کنید.");
+      if (fnError) {
+        console.error('Email function error:', fnError);
+        // Don't throw - submission was saved, email is secondary
       }
-    } catch {
-      toast.error("خطا در ارتباط با سرور. لطفاً دوباره تلاش کنید.");
+
+      toast.success("Your message has been sent!");
+      reset();
+      setFiles([]);
+    } catch (error: any) {
+      console.error('Submit error:', error);
+      toast.error(error.message || "خطا در ارسال پیام. لطفاً دوباره تلاش کنید.");
     }
     setIsSubmitting(false);
   };
@@ -115,14 +153,15 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block font-medium mb-1.5 text-sm">شماره تماس *</label>
+                    <label className="block font-medium mb-1.5 text-sm">ایمیل *</label>
                     <input
-                      {...register("phone", { required: "شماره تماس الزامی است" })}
+                      type="email"
+                      {...register("email", { required: "ایمیل الزامی است", pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "ایمیل معتبر نیست" } })}
                       className="w-full border border-input rounded-lg py-3 px-4 bg-background text-foreground focus:ring-2 focus:ring-ring outline-none"
-                      placeholder="۰۹۱۲XXXXXXX"
+                      placeholder="example@email.com"
                       dir="ltr"
                     />
-                    {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone.message}</p>}
+                    {errors.email && <p className="text-destructive text-xs mt-1">{errors.email.message}</p>}
                   </div>
 
                   <div>
